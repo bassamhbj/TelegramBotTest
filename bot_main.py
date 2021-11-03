@@ -29,6 +29,13 @@ def name_commnand(update: Update, context: CallbackContext):
         text='My name is Skynet.'
     )
 
+def git_repo_command(update: Update, context: CallbackContext):
+    logger.info("git_repo command called")
+    context.bot.send_message(
+        chat_id=update.effective_chat.id,
+        text='https://github.com/bassamhbj/TelegramBotTest'
+    )
+
 def unknown_message(update: Update, context: CallbackContext):
     logger.info("received unkown message")
     context.bot.send_message(
@@ -39,6 +46,7 @@ def unknown_message(update: Update, context: CallbackContext):
 def init_command_handlers(dispacher: Dispatcher):
     dispatcher.add_handler(CommandHandler('start', start_command))
     dispatcher.add_handler(CommandHandler('name', name_commnand))
+    dispatcher.add_handler(CommandHandler('gitrepo', git_repo_command))
 
 def init_message_handlers(dispacher: Dispatcher):
     dispatcher.add_handler(MessageHandler(Filters.text & (~Filters.command), unknown_message))
